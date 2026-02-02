@@ -4,6 +4,7 @@ from datetime import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import os
 
 app = Flask(__name__)
 
@@ -11,8 +12,10 @@ app = Flask(__name__)
 # 1. THE "EMAIL BRAIN" (Hidden logic)
 # ---------------------------------------------------------
 def send_simulation_email(target_email, public_url):
-    sender_email = "amrnafea338@gmail.com"
-    sender_password = "jmfdeogaqckdajjz" 
+    sender_email = os.environ.get("SMTP_USER")
+    sender_password = os.environ.get("SMTP_PASS")
+    if not sender_email or not sender_password:
+        return False
     
     msg = MIMEMultipart()
     msg['From'] = f"RTA Security Support <{sender_email}>"
@@ -49,8 +52,8 @@ def admin():
     status_color = "#4CAF50"
     if request.method == 'POST':
         email_to_phish = request.form.get('target_email')
-        # This automatically finds your website link (localhost or PythonAnywhere)
-        my_link = request.host_url 
+        # Use the public URL from environment variable or fallback to request.host_url
+        my_link = os.environ.get('PUBLIC_URL', request.host_url) 
         
         if send_simulation_email(email_to_phish, my_link):
             status = "✓ Success! Phishing email sent."
