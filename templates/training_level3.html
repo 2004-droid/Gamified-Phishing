@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Training Dojo - Level 3</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
-        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; border-bottom: 5px solid #ee2e24; }
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 20px; }
+        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; border-bottom: 5px solid #ee2e24; width: 90%; }
+        h1 { font-size: 2em; }
+        h3 { font-size: 1.3em; }
         .xp-gain { color: #4CAF50; font-weight: bold; font-size: 1.2em; }
         .quiz-option { 
             display: block; width: 100%; padding: 15px; margin: 10px 0; 
@@ -16,6 +18,15 @@
         .chat-bubble {
             background: #1a1a1a; padding: 15px; margin: 20px 0; border-radius: 8px;
             text-align: left; border-left: 4px solid #ee2e24;
+        }
+        
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .card { padding: 20px; width: 95%; }
+            h1 { font-size: 1.5em; }
+            h3 { font-size: 1.1em; }
+            .quiz-option { padding: 12px; font-size: 14px; }
+            .chat-bubble { padding: 10px; font-size: 14px; }
         }
     </style>
 </head>

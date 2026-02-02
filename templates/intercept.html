@@ -10,9 +10,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #f8f9fa;
             text-align: center;
+            padding: 20px;
         }
 
         /* The Loading State */
@@ -37,7 +38,17 @@
             border-radius: 12px;
             box-shadow: 0 0 30px rgba(238, 46, 36, 0.5);
             max-width: 500px;
+            width: 90%;
             border: 2px solid #ee2e24;
+        }
+        
+        @media (max-width: 600px) {
+            #reveal-container {
+                padding: 20px;
+                width: 95%;
+            }
+            h1 { font-size: 1.8em; }
+            .btn-training { padding: 12px 20px; font-size: 14px; }
         }
 
         .alert-icon { font-size: 50px; margin-bottom: 10px; }
