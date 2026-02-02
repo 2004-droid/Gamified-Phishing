@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 import csv
 from datetime import datetime
 import os
-import resend
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 app = Flask(__name__)
 
@@ -10,14 +11,17 @@ app = Flask(__name__)
 # 1. THE "EMAIL BRAIN" (Hidden logic)
 # ---------------------------------------------------------
 def send_simulation_email(target_email, public_url):
-    resend_api_key = os.environ.get("RESEND_API_KEY")
+    brevo_api_key = os.environ.get("BREVO_API_KEY")
     sender_email = os.environ.get("SMTP_USER", "amrnafea338@gmail.com")
     
-    if not resend_api_key:
-        print("RESEND_API_KEY not set")
+    if not brevo_api_key:
+        print("BREVO_API_KEY not set")
         return False
 
-    resend.api_key = resend_api_key
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key['api-key'] = brevo_api_key
+    
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
     html_body = f"""
     <html>
@@ -29,18 +33,19 @@ def send_simulation_email(target_email, public_url):
     </html>
     """
 
+    send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+        to=[{"email": target_email}],
+        sender={"email": sender_email, "name": "RTA Security Support"},
+        subject="Urgent: nol Card Account Verification Required",
+        html_content=html_body
+    )
+
     try:
-        params = {
-            "from": f"RTA Security <onboarding@resend.dev>",
-            "to": [target_email],
-            "subject": "Urgent: nol Card Account Verification Required",
-            "html": html_body
-        }
-        email = resend.Emails.send(params)
-        print(f"Resend response: {email}")
+        api_response = api_instance.send_transac_email(send_smtp_email)
+        print(f"Brevo response: {api_response}")
         return True
-    except Exception as e:
-        print(f"Resend Error: {e}")
+    except ApiException as e:
+        print(f"Brevo Error: {e}")
         return False
 
 # ---------------------------------------------------------
