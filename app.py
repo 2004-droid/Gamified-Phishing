@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import csv
 from datetime import datetime
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import os
+import resend
 
 app = Flask(__name__)
 
@@ -12,15 +10,14 @@ app = Flask(__name__)
 # 1. THE "EMAIL BRAIN" (Hidden logic)
 # ---------------------------------------------------------
 def send_simulation_email(target_email, public_url):
-    sender_email = os.environ.get("SMTP_USER")
-    sender_password = os.environ.get("SMTP_PASS")
-    if not sender_email or not sender_password:
-        return False
+    resend_api_key = os.environ.get("RESEND_API_KEY")
+    sender_email = os.environ.get("SMTP_USER", "amrnafea338@gmail.com")
     
-    msg = MIMEMultipart()
-    msg['From'] = f"RTA Security Support <{sender_email}>"
-    msg['To'] = target_email
-    msg['Subject'] = "Urgent: nol Card Account Verification Required"
+    if not resend_api_key:
+        print("RESEND_API_KEY not set")
+        return False
+
+    resend.api_key = resend_api_key
 
     html_body = f"""
     <html>
@@ -31,16 +28,19 @@ def send_simulation_email(target_email, public_url):
       </body>
     </html>
     """
-    msg.attach(MIMEText(html_body, 'html'))
 
     try:
-        server = smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10)
-        server.login(sender_email, sender_password)
-        server.send_message(msg)
-        server.quit()
+        params = {
+            "from": f"RTA Security <onboarding@resend.dev>",
+            "to": [target_email],
+            "subject": "Urgent: nol Card Account Verification Required",
+            "html": html_body
+        }
+        email = resend.Emails.send(params)
+        print(f"Resend response: {email}")
         return True
     except Exception as e:
-        print(f"SMTP Error: {e}")
+        print(f"Resend Error: {e}")
         return False
 
 # ---------------------------------------------------------
