@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTA Portal - Login</title>
+    
+    <link rel="icon" href="{{ url_for('static', filename='rta_dubai.png') }}" type="image/png">
+
+    <style>
+        /* 1. STYLING (The Look) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modernized font */
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #2b3d63; /* RTA Dark Blue */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header logic with Flexbox for Logo + Language Toggle */
+        header {
+            background: white;
+            padding: 10px 10%;
+            border-bottom: 3px solid #ee2e24; /* RTA Red */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header-logo {
+            height: 45px;
+            width: auto;
+        }
+
+        .lang-toggle {
+            color: #ee2e24;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #ee2e24;
+            outline: none;
+        }
+
+        /* Official RTA Red Button */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #ee2e24; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #d1271d;
+        }
+
+        button:active {
+            transform: scale(0.98); /* Slight click effect */
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="{{ url_for('static', filename='rta_dubai.png') }}" alt="RTA Logo" class="header-logo">
+        <div class="lang-toggle">العربية</div>
+    </header>
+
+    <div class="container">
+        <h2>Login to nol Services</h2>
+        
+        <form action="/submit" method="POST">
+            <div class="input-group">
+                <label for="username">Username or Email</label>
+                <input type="text" id="username" name="username" placeholder="Enter your credentials" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <p class="footer-text">© 2026 Roads and Transport Authority. Secure Login for UAE Residents</p>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Dojo - Level 2</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
+        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; border-bottom: 5px solid #ee2e24; }
+        .xp-gain { color: #4CAF50; font-weight: bold; font-size: 1.2em; }
+        .quiz-option { 
+            display: block; width: 100%; padding: 15px; margin: 10px 0; 
+            background: #3d3d3d; border: 1px solid #555; color: white; 
+            cursor: pointer; border-radius: 5px; text-align: left;
+        }
+        .quiz-option:hover { background: #4d4d4d; border-color: #ee2e24; }
+        .email-preview {
+            background: #1a1a1a; padding: 15px; margin: 20px 0; border-radius: 8px;
+            text-align: left; border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🥋 Training Dojo: Level 2</h1>
+        <p>You've mastered URLs. Now let's identify suspicious emails!</p>
+        <hr>
+        <h3>MISSION: Spot the red flags in this email</h3>
+        
+        <div class="email-preview">
+            <strong>From:</strong> security@paypa1-verify.com<br>
+            <strong>Subject:</strong> URGENT: Your account will be suspended!<br>
+            <strong>Date:</strong> Today, 2:47 AM<br><br>
+            <p style="font-size: 0.9em;">
+                Dear Valued Customer,<br><br>
+                We detected unusual activity on your account. You must verify your identity within 2 hours or your account will be permanently suspended.<br><br>
+                Click here immediately: <a href="#" style="color: #ee2e24;">Verify Now</a><br><br>
+                Regards,<br>
+                PayPal Security Team
+            </p>
+        </div>
+
+        <h3>What is the BIGGEST red flag in this email?</h3>
+        
+        <button class="quiz-option" onclick="finish('wrong')">A. The email was sent at 2:47 AM</button>
+        <button class="quiz-option" onclick="finish('correct')">B. The sender domain is "paypa1-verify.com" (number 1 instead of letter L)</button>
+        <button class="quiz-option" onclick="finish('wrong')">C. The email mentions unusual activity</button>
+
+        <div id="feedback" style="margin-top:20px; display:none;"></div>
+    </div>
+
+    <script>
+        function finish(status) {
+            const feedback = document.getElementById('feedback');
+            if(status === 'correct') {
+                feedback.innerHTML = "<h2 class='xp-gain'>EXCELLENT! +75 XP Earned</h2><p>The real PayPal domain is paypal.com, not paypa1-verify.com. Scammers use similar-looking domains to trick you!</p><p style='margin-top: 20px; color: #4CAF50;'><strong>Good job! Advancing to Level 3...</strong></p>";
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "/training_level3";
+                }, 4000);
+            } else {
+                feedback.innerHTML = "<h2 style='color:#ee2e24;'>NOT QUITE!</h2><p>Look closely at the sender's email address. Does 'paypa1-verify.com' look suspicious? Check for letter/number substitutions!</p>";
+                feedback.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

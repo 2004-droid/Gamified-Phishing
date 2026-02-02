@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authenticating...</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        /* The Loading State */
+        #loader-container { display: block; }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #ee2e24; /* RTA Red */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* The "Gotcha" State */
+        #reveal-container {
+            display: none;
+            background: #1a1a1a;
+            color: #ff4d4d;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(238, 46, 36, 0.5);
+            max-width: 500px;
+            border: 2px solid #ee2e24;
+        }
+
+        .alert-icon { font-size: 50px; margin-bottom: 10px; }
+        .btn-training {
+            background: #ee2e24;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader-container">
+        <div class="spinner"></div>
+        <h2>Secure Login in Progress...</h2>
+        <p>Connecting to RTA Secure Servers</p>
+    </div>
+
+    <div id="reveal-container">
+        <div class="alert-icon">⚠️</div>
+        <h1>GAME OVER</h1>
+        <p>You just handed your credentials to a simulated hacker.</p>
+        <p style="color: #ccc; font-size: 0.9em;">Reason: You logged into <strong>rta-portal.xyz</strong> instead of <strong>rta.ae</strong>.</p>
+    <button class="btn-training" onclick="window.location.href='/training-dojo'">
+    RECOVER YOUR ACCOUNT (+50 XP)
+</button>
+    </div>
+
+    <script>
+        // Wait 3 seconds, then switch views
+        setTimeout(() => {
+            document.getElementById('loader-container').style.display = 'none';
+            document.getElementById('reveal-container').style.display = 'block';
+            document.body.style.backgroundColor = "#000"; // Darken background for impact
+        }, 3000);
+    </script>
+</body>
+</html>

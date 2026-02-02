@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Dojo - Level 1</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
+        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; border-bottom: 5px solid #ee2e24; }
+        .xp-gain { color: #4CAF50; font-weight: bold; font-size: 1.2em; }
+        .quiz-option { 
+            display: block; width: 100%; padding: 15px; margin: 10px 0; 
+            background: #3d3d3d; border: 1px solid #555; color: white; 
+            cursor: pointer; border-radius: 5px; text-align: left;
+        }
+        .quiz-option:hover { background: #4d4d4d; border-color: #ee2e24; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🥋 Training Dojo: Level 1</h1>
+        <p>Your account was "hacked" because of a fake URL. Let's fix that.</p>
+        <hr>
+        <h3>MISSION: Spot the safe link. Which one is the REAL RTA website?</h3>
+        
+        <button class="quiz-option" onclick="finish('wrong')">A. http://rta-dubai-portal.com/login</button>
+        <button class="quiz-option" onclick="finish('wrong')">B. https://rta.services-ae.net</button>
+        <button class="quiz-option" onclick="finish('correct')">C. https://www.rta.ae</button>
+
+        <div id="feedback" style="margin-top:20px; display:none;"></div>
+    </div>
+
+    <script>
+        function finish(status) {
+            const feedback = document.getElementById('feedback');
+            if(status === 'correct') {
+                feedback.innerHTML = "<h2 class='xp-gain'>SUCCESS! +50 XP Earned</h2><p>You've recovered your health. Advancing to Level 2...</p>";
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "/training_level2";
+                }, 3000);
+            } else {
+                feedback.innerHTML = "<h2 style='color:#ee2e24;'>TRY AGAIN!</h2><p>Look for the <strong>.ae</strong> domain—it's the official UAE government suffix.</p>";
+                feedback.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Dojo - Level 3</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
+        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto; border-bottom: 5px solid #ee2e24; }
+        .xp-gain { color: #4CAF50; font-weight: bold; font-size: 1.2em; }
+        .quiz-option { 
+            display: block; width: 100%; padding: 15px; margin: 10px 0; 
+            background: #3d3d3d; border: 1px solid #555; color: white; 
+            cursor: pointer; border-radius: 5px; text-align: left;
+        }
+        .quiz-option:hover { background: #4d4d4d; border-color: #ee2e24; }
+        .chat-bubble {
+            background: #1a1a1a; padding: 15px; margin: 20px 0; border-radius: 8px;
+            text-align: left; border-left: 4px solid #ee2e24;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🥋 Training Dojo: Level 3</h1>
+        <p>Almost there! Now learn to spot social engineering tactics.</p>
+        <hr>
+        <h3>MISSION: What's suspicious about this message?</h3>
+        
+        <div class="chat-bubble">
+            <strong>Message from: "Support Team"</strong><br><br>
+            <p style="font-size: 0.9em;">
+                Hi there!<br><br>
+                We need to verify your account security. To proceed, please reply with:<br>
+                • Your password<br>
+                • Your security question answers<br><br>
+                This is urgent and must be completed within 1 hour!<br><br>
+                Click here: <a href="#" style="color: #ee2e24;">Verify Account</a>
+            </p>
+        </div>
+
+        <h3>Why is this message a RED FLAG?</h3>
+        
+        <button class="quiz-option" onclick="finish('wrong')">A. The support team is asking for verification</button>
+        <button class="quiz-option" onclick="finish('correct')">B. Legitimate companies NEVER ask for passwords or security answers via message</button>
+        <button class="quiz-option" onclick="finish('wrong')">C. The message includes a verification link</button>
+
+        <div id="feedback" style="margin-top:20px; display:none;"></div>
+    </div>
+
+    <script>
+        function finish(status) {
+            const feedback = document.getElementById('feedback');
+            if(status === 'correct') {
+                feedback.innerHTML = "<h2 class='xp-gain'>CHAMPION! +100 XP Earned</h2><p>You've unlocked security mastery! Real companies never ask for passwords or sensitive info via email/chat. This is called 'social engineering.'</p><p style='margin-top: 20px; color: #4CAF50;'><strong>Good job! Redirecting you to the authentic RTA webpage...</strong></p>";
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "https://www.rta.ae";
+                }, 4000);
+            } else {
+                feedback.innerHTML = "<h2 style='color:#ee2e24;'>NOT QUITE!</h2><p>The biggest red flag is that NO legitimate organization will EVER ask you to send passwords or security answers via message. This is social engineering!</p>";
+                feedback.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
