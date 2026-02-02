@@ -34,7 +34,7 @@ def send_simulation_email(target_email, public_url):
     msg.attach(MIMEText(html_body, 'html'))
 
     try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=10)
         server.starttls()
         server.login(sender_email, sender_password)
         server.send_message(msg)
