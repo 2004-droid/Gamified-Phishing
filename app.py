@@ -40,7 +40,8 @@ def send_simulation_email(target_email, public_url):
         server.send_message(msg)
         server.quit()
         return True
-    except:
+    except Exception as e:
+        print(f"SMTP Error: {e}")
         return False
 
 # ---------------------------------------------------------
