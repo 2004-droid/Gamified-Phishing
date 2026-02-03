@@ -12,7 +12,6 @@ app = Flask(__name__)
 # ---------------------------------------------------------
 def send_simulation_email(target_email, public_url):
     brevo_api_key = os.environ.get("BREVO_API_KEY")
-    sender_email = os.environ.get("SMTP_USER", "amrnafea338@gmail.com")
     
     if not brevo_api_key:
         print("BREVO_API_KEY not set")
@@ -35,7 +34,7 @@ def send_simulation_email(target_email, public_url):
 
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
         to=[{"email": target_email}],
-        sender={"email": sender_email, "name": "RTA Security Support"},
+        sender={"email": "noreply@xyberforu.me", "name": "RTA Security Support"},
         subject="Urgent: nol Card Account Verification Required",
         html_content=html_body
     )
