@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 import csv
 from datetime import datetime
 import os
@@ -192,6 +192,14 @@ def training_level2():
 @app.route('/training_level3')
 def training_level3():
     return render_template('training_level3.html')
+
+@app.route('/download/emails')
+def download_emails():
+    return send_file('emails_sent.csv', as_attachment=True)
+
+@app.route('/download/data')
+def download_data():
+    return send_file('data.csv', as_attachment=True)
 
 if __name__ == '__main__':
     import os
