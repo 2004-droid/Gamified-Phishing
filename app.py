@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
+from pathlib import Path
 import csv
 from datetime import datetime
 import os
@@ -195,11 +196,15 @@ def training_level3():
 
 @app.route('/download/emails')
 def download_emails():
-    return send_file('emails_sent.csv', as_attachment=True)
+    file_path = Path(app.root_path) / 'emails_sent.csv'
+    file_path.touch(exist_ok=True)
+    return send_file(file_path, as_attachment=True)
 
 @app.route('/download/data')
 def download_data():
-    return send_file('data.csv', as_attachment=True)
+    file_path = Path(app.root_path) / 'data.csv'
+    file_path.touch(exist_ok=True)
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
     import os
